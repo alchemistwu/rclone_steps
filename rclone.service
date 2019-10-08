@@ -1,13 +1,13 @@
 # /etc/systemd/system/rclone.service
 [Unit]
 Description=Google Drive (rclone)
-AssertPathIsDirectory=/mnt/google-drive
+AssertPathIsDirectory=/mnt/gdrive
 After=plexdrive.service
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/rclone mount \
-        --config=/home/silasi/.config/rclone/rclone.conf \
+        --config=/home/pi/.config/rclone/rclone.conf \
         --allow-other \
         --cache-tmp-upload-path=/tmp/rclone/upload \
         --cache-chunk-path=/tmp/rclone/chunks \
@@ -21,8 +21,8 @@ ExecStart=/usr/bin/rclone mount \
         --checkers=16 \
         --bwlimit=40M \
         --dir-cache-time=60m \
-        --cache-info-age=60m GDrive:/ /mnt/google-drive
-ExecStop=/bin/fusermount -u /mnt/google-drive
+        --cache-info-age=60m gdrive:/ /mnt/gdrive
+ExecStop=/bin/fusermount -u /mnt/gdrive
 Restart=always
 RestartSec=10
 
